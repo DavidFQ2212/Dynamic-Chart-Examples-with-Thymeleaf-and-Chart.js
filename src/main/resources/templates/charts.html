@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gráficas Dinámicas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas {
+            margin: 20px auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Ejemplo de Múltiples Gráficas</h1>
+
+    <!-- Contenedores para las gráficas -->
+    <div>
+        <h2>Gráfica de Barras</h2>
+        <canvas id="barChart"></canvas>
+    </div>
+    <div>
+        <h2>Gráfica de Línea</h2>
+        <canvas id="lineChart"></canvas>
+    </div>
+    <div>
+        <h2>Gráfica de Pastel</h2>
+        <canvas id="pieChart"></canvas>
+    </div>
+    <div>
+        <h2>Gráfica de Radar</h2>
+        <canvas id="radarChart"></canvas>
+    </div>
+    <div>
+        <h2>Gráfica de Dispersión</h2>
+        <canvas id="scatterChart"></canvas>
+    </div>
+
+    <script th:inline="javascript">
+        // Gráfica de Barras
+        const barLabels = /*[[${barLabels}]]*/ [];
+        const barValues = /*[[${barValues}]]*/ [];
+        new Chart(document.getElementById("barChart"), {
+            type: "bar",
+            data: {
+                labels: barLabels,
+                datasets: [{
+                    label: "Datos de Barras",
+                    data: barValues,
+                    backgroundColor: "rgba(75, 192, 192, 0.2)",
+                    borderColor: "rgba(75, 192, 192, 1)",
+                    borderWidth: 1
+                }]
+            },
+            options: { scales: { y: { beginAtZero: true } } }
+        });
+
+        // Gráfica de Línea
+        const lineValues = /*[[${lineValues}]]*/ [];
+        new Chart(document.getElementById("lineChart"), {
+            type: "line",
+            data: {
+                labels: barLabels,
+                datasets: [{
+                    label: "Datos de Línea",
+                    data: lineValues,
+                    backgroundColor: "rgba(153, 102, 255, 0.2)",
+                    borderColor: "rgba(153, 102, 255, 1)",
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        // Gráfica de Pastel
+        const pieValues = /*[[${pieValues}]]*/ [];
+        new Chart(document.getElementById("pieChart"), {
+            type: "pie",
+            data: {
+                labels: barLabels,
+                datasets: [{
+                    label: "Datos de Pastel",
+                    data: pieValues,
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(255, 206, 86, 0.2)",
+                        "rgba(75, 192, 192, 0.2)",
+                        "rgba(153, 102, 255, 0.2)"
+                    ],
+                    borderColor: [
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(255, 206, 86, 1)",
+                        "rgba(75, 192, 192, 1)",
+                        "rgba(153, 102, 255, 1)"
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        // Gráfica de Radar
+        const radarValues = /*[[${radarValues}]]*/ [];
+        new Chart(document.getElementById("radarChart"), {
+            type: "radar",
+            data: {
+                labels: barLabels,
+                datasets: [{
+                    label: "Datos de Radar",
+                    data: radarValues,
+                    backgroundColor: "rgba(255, 159, 64, 0.2)",
+                    borderColor: "rgba(255, 159, 64, 1)",
+                    borderWidth: 1
+                }]
+            }
+        });
+
+        // Gráfica de Dispersión
+        const scatterValues = /*[[${scatterValues}]]*/ [];
+        new Chart(document.getElementById("scatterChart"), {
+            type: "scatter",
+            data: {
+                datasets: [{
+                    label: "Datos de Dispersión",
+                    data: scatterValues,
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: "linear",
+                        position: "bottom"
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
